@@ -1,7 +1,7 @@
 ﻿namespace AppFramework.Infrastructure.Tasks
 {
-	public interface IRunAtInit
+    public interface IRunAtInit : IRunTaskExecuter
 	{
-		void Execute();
+		
 	}
 }

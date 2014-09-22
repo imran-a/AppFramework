@@ -1,7 +1,6 @@
 namespace AppFramework.Infrastructure.Tasks
 {
-	public interface IRunOnError
+	public interface IRunOnError : IRunTaskExecuter
 	{
-		void Execute();
 	}
 }

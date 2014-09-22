@@ -195,6 +195,7 @@
     <Compile Include="Infrastructure\Tasks\IRunOnEachRequest.cs" />
     <Compile Include="Infrastructure\Tasks\IRunOnError.cs" />
     <Compile Include="DependencyResolution\TaskRegistry.cs" />
+    <Compile Include="Infrastructure\Tasks\IRunTaskExecuter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

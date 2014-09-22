@@ -19,48 +19,33 @@ namespace AppFramework
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            StructuremapMvc.StructureMapDependencyScope.CreateNestedContainer();
-            using (var container = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer)
-            {
-                foreach (var task in container.GetAllInstances<IRunAtInit>())
-                {
-                    task.Execute();
-                }
+            RunTaskType<IRunAtInit>();
+            RunTaskType<IRunAtStartup>();
 
-                foreach (var task in container.GetAllInstances<IRunAtStartup>())
-                {
-                    task.Execute();
-                }
-            }
         }
 
         public void Application_BeginRequest()
         {
-            StructuremapMvc.StructureMapDependencyScope.CreateNestedContainer();
-            var container = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer;
-            foreach (var task in container.GetAllInstances<IRunOnEachRequest>())
-            {
-                task.Execute();
-            }
+            RunTaskType<IRunOnEachRequest>();
         }
 
         public void Application_Error()
         {
-            StructuremapMvc.StructureMapDependencyScope.CreateNestedContainer();
-            var container = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer;
-            foreach (var task in container.GetAllInstances<IRunOnError>())
-            {
-                task.Execute();
-            }
+            RunTaskType<IRunOnError>();
         }
 
         public void Application_EndRequest()
         {
+            RunTaskType<IRunAfterEachRequest>();
+        }
+
+        private void RunTaskType<T>() 
+        {
             StructuremapMvc.StructureMapDependencyScope.CreateNestedContainer();
             var container = StructuremapMvc.StructureMapDependencyScope.CurrentNestedContainer;
-            foreach (var task in container.GetAllInstances<IRunAfterEachRequest>())
+            foreach (var task in container.GetAllInstances<T>())
             {
-                task.Execute();
+                ((IRunTaskExecuter) task).Execute();
             }
         }
     }

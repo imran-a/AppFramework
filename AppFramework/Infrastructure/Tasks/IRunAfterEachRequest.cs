@@ -1,7 +1,7 @@
 namespace AppFramework.Infrastructure.Tasks
 {
-	public interface IRunAfterEachRequest
+    public interface IRunAfterEachRequest : IRunTaskExecuter
 	{
-		void Execute();
+		
 	}
 }
