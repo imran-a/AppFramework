@@ -10,7 +10,7 @@ namespace AppFramework.DependencyResolution
         {
             Scan(scan =>
             {
-                scan.AssembliesFromApplicationBaseDirectory(a => a.FullName.StartsWith("AppFramework"));
+                scan.AssembliesFromApplicationBaseDirectory(a => a.FullName.StartsWith(typeof(TaskRegistry).Namespace.Split('.')[0]));
                 scan.AddAllTypesOf<IRunAtInit>();
                 scan.AddAllTypesOf<IRunAtStartup>();
                 scan.AddAllTypesOf<IRunOnEachRequest>();
