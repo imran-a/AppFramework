@@ -28,6 +28,7 @@ namespace AppFramework.DependencyResolution {
                 //c.AddRegistry(new DefaultRegistry());
                 c.AddRegistry(new StandardRegistry());
                 c.AddRegistry(new ControllerRegistry());
+                c.AddRegistry(new ActionFilterRegistry());
                 c.AddRegistry(new MvcRegistry());
                 c.AddRegistry(new TaskRegistry());
             });
